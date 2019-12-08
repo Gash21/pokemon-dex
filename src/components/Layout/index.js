@@ -1,6 +1,7 @@
 import React from "react";
-import { Nav, Jumbotron, Navbar, Container } from 'react-bootstrap'
-import './styles.css';
+import { Nav } from 'react-bootstrap'
+import 'components/styles.css';
+import { Header } from 'components'
 
 class Layout extends React.PureComponent {
   constructor(props) {
@@ -12,16 +13,8 @@ class Layout extends React.PureComponent {
 
   render() {
     const { children, path } = this.props
-    console.log(this.props)
     return <div>
-      {/* <Jumbotron className="site-header-container">
-        <h2 className="site-header-text">Ayo Tangkap Pokemon!</h2>
-      </Jumbotron> */}
-      <Navbar className="site-header-container" expand="lg">
-        <Container className="header-image-container">
-          <Navbar.Brand className="header-image-container"><img src="/icon.png" alt="/logo192.png" className="header-image" /></Navbar.Brand>
-        </Container>
-      </Navbar>
+      <Header />
       <Nav justify variant="tabs" defaultActiveKey="/home">
         <Nav.Item>
           <Nav.Link active={path === '/' ? true : false} href="/">Pokemon List</Nav.Link>
@@ -33,7 +26,7 @@ class Layout extends React.PureComponent {
       <div>
         {children}
       </div>
-    </div>
+    </div >
   }
 }
 

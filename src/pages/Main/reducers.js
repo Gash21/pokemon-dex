@@ -1,6 +1,8 @@
 import { GET_POKEMON_LIST } from 'libraries/types'
 const initialState = {
-  pokemonList: []
+  pokemonList: [],
+  next: null,
+  previous: null,
 };
 
 const mainReducers = (state = initialState, action) => {
@@ -8,7 +10,10 @@ const mainReducers = (state = initialState, action) => {
     case GET_POKEMON_LIST:
       return {
         ...state,
-        pokemonList: action.payload
+        pokemonList: action.payload,
+        next: action.next,
+        previous: action.previous,
+
       };
 
     default:
