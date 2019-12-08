@@ -8,6 +8,7 @@ const mainReducers = (state = initialState, action) => {
     case GET_POKEMON_LIST:
       return {
         ...state,
+        pokemonList: action.payload
       };
 
     default:
