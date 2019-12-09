@@ -1,3 +1,6 @@
 export { default as Layout } from 'components/Layout'
 export { default as Header } from 'components/Header'
 export { default as ListItem } from 'components/ListItem'
+export { default as PokemonListContainer } from 'components/PokemonListContainer'
+export { default as DefaultStatus } from 'components/DefaultStatus'
+export { default as DetailCard } from 'components/DetailCard'

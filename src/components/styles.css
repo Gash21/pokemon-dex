@@ -8,6 +8,10 @@
   padding: 0 10px;
 }
 
+.children-container {
+  padding: 1rem 0.5rem;
+}
+
 .site-header-text {
   color: #fff;
   text-align: center;
@@ -24,4 +28,15 @@
   text-align: center;
   align-items: center;
   flex: 1;
+}
+
+.pokemon-list-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pokemon-list {
+  flex: 1 0 45%;
+  margin: 5px;
+  height: 50;
 }

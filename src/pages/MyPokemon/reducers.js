@@ -1,15 +1,30 @@
-import { GET_POKEMON_DETAIL } from 'libraries/types'
+import { SAVE_POKEMON, RELEASE_POKEMON } from 'libraries/types'
 const initialState = {
-  pokemonDetail: {}
+  list: []
 };
 
 const myPokemonReducers = (state = initialState, action) => {
   switch (action.type) {
-    case GET_POKEMON_DETAIL:
+    case SAVE_POKEMON:
       return {
         ...state,
-        pokemonDetail: action.payload
+        list: [
+          ...state.list,
+          action.payload
+        ]
       };
+    case RELEASE_POKEMON:
+      let list = state.list;
+      let index = list.findIndex((li) => {
+        return li.name === action.name
+      })
+      console.log(index)
+      list.splice(index, 1)
+      console.log(list)
+      return {
+        ...state,
+        list
+      }
 
     default:
       return state;
