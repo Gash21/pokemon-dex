@@ -3,7 +3,6 @@ import fetchAPI from 'libraries/api';
 
 export const getListPokemon = (page, limit) => {
   return dispatch => {
-    console.log(page, limit)
     const offset = (page - 1) * limit;
 
     dispatch({

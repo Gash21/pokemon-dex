@@ -46,14 +46,14 @@ class MyPokemon extends React.Component {
                   <Image src={sprites.front_default}></Image>
                 </Col>
                 <Col sm={8} xs={8} md={8} style={{ flexDirection: "row", padding: 10, }}>
-                  <strong>
-                    {`#${id} ${this.toTitleCase(name.replace(/-/g, ' '))}`}
-                  </strong><br />
                   <i>
                     <strong>
                       {`${this.toTitleCase(customName.replace(/-/g, ' '))}`}
                     </strong>
-                  </i>
+                  </i><br />
+                  <strong style={{ fontSize: 14 }}>
+                    {`#${id} ${this.toTitleCase(name.replace(/-/g, ' '))}`}
+                  </strong><br />
                   <br />
                   <Button size="sm" style={{ marginRight: 15 }} onClick={() => navigate(`/detail/${name}`)}>View Detail</Button>
                   <Button size="sm" variant="danger" onClick={() => {

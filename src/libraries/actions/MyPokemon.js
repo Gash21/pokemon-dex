@@ -2,7 +2,6 @@ import { SAVE_POKEMON, RELEASE_POKEMON } from "libraries/types"
 
 export const savePokemon = (pokemon) => {
   return dispatch => {
-    console.log(pokemon)
     dispatch({
       type: SAVE_POKEMON,
       payload: pokemon
@@ -12,7 +11,6 @@ export const savePokemon = (pokemon) => {
 
 export const releasePokemon = (name, id) => {
   return dispatch => {
-    console.log(name, id);
     dispatch({
       type: RELEASE_POKEMON,
       name,
