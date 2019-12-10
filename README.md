@@ -1,7 +1,8 @@
 # Mini PokéDex
 Hello, my name is Galih Arghubi, I am Fullstack Developer.
 First, I want to say sorry for not using automated test. But I already do a scenario test on this project.
-Please kindly check this submission, your response will meant a lot for me.
+I am using ReactJS as framework for this project and using Redux for global state management. 
+Please kindly check my submission, your response will meant a lot for me.
 
 ## Getting Started
 
@@ -25,4 +26,3 @@ Please check live demo here [DEMO](http://35.185.184.201/)
 
 ## For Question
 You can always contact me on : galiharghubi@gmail.com
-
