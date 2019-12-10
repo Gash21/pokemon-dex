@@ -29,9 +29,9 @@ class Layout extends React.PureComponent {
       </div>
       <Navbar expand="lg" variant="light" bg="light" fixed="bottom">
         <Container >
-          <a className="pull-left" rel="noopener noreferrer" target="_blank" href="https://github.com/Gash21/pokemon-tokopedia">
+          <a className="pull-left footer" rel="noopener noreferrer" target="_blank" href="https://github.com/Gash21/pokemon-tokopedia">
             <Image src="/github-logo.png" width={20} height={20} />
-            <span> Github</span>
+            <span className="margin-text"> Github</span>
           </a>
           <a className="pull-right" rel="noopener noreferrer" target="_blank" href="https://github.com/Gash21">
             <span> by Galih Arghubi</span>

@@ -3,6 +3,7 @@ const initialState = {
   pokemonList: [],
   next: null,
   previous: null,
+  count: 0
 };
 
 const mainReducers = (state = initialState, action) => {
@@ -13,7 +14,7 @@ const mainReducers = (state = initialState, action) => {
         pokemonList: action.payload,
         next: action.next,
         previous: action.previous,
-
+        count: action.count
       };
 
     case CLEAR_POKEMON_LIST:

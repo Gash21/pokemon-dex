@@ -130,7 +130,11 @@ class Detail extends React.Component {
       // navigate('/')
       return (
         <Layout path={path}>
-          <span style={{ textAlign: 'center', fontWeight: 'bold' }}>Now loading, please wait...</span>
+          <Container>
+            <div className="text-center">
+              <span style={{ textAlign: 'center', fontWeight: 'bold' }}>Now loading, please wait...</span>
+            </div>
+          </Container>
         </Layout>
       );
     }
@@ -208,14 +212,13 @@ class Detail extends React.Component {
         </Container>
 
         <Modal
-          size="sm"
           show={showModal}
           onHide={() => this.toggleModal()}
-          aria-labelledby="example-modal-sizes-title-sm-vcenter"
+          aria-labelledby="example-modal-sizes-title-vcenter"
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title id="example-modal-sizes-title-sm">
+            <Modal.Title id="example-modal-sizes-title">
               {title}
             </Modal.Title>
           </Modal.Header>

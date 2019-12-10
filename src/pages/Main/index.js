@@ -2,13 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getListPokemon } from 'libraries/actions'
 import { Layout, ListItem, PokemonListContainer } from 'components';
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { navigate } from "@reach/router";
 
-const mapStateToProps = ({ main }) => ({
+const mapStateToProps = ({ main, myPokemon }) => ({
   pokemonList: main.pokemonList,
   next: main.next,
-  previous: main.previous
+  previous: main.previous,
+  myPokemon: myPokemon.list,
+  count: main.count
 });
 
 const mapDispatchToProps = {
@@ -41,7 +43,13 @@ class Main extends React.Component {
 
   renderPokemon() {
     if (this.props.pokemonList.length === 0) {
-      return <span style={{ textAlign: 'center', fontWeight: 'bold' }}>Now loading, please wait...</span>
+      return (
+        <Container>
+          <div className="text-center">
+            <span style={{ textAlign: 'center', fontWeight: 'bold' }}>Now loading, please wait...</span>
+          </div>
+        </Container>
+      )
     }
     return this.props.pokemonList.map(item => {
       return <ListItem key={item.name} onPress={() => this.onPress(item.name)}>
@@ -51,9 +59,14 @@ class Main extends React.Component {
   }
 
   render() {
-    const { path, next, previous } = this.props
+    const { path, next, previous, myPokemon, count } = this.props
     const { page } = this.state
     return <Layout path={path}>
+      <div className="text-center">
+        Total Pokemon : {count}
+        <br />
+        Total Pokemon Owned : {myPokemon.length}
+      </div>
       <PokemonListContainer>
         {this.renderPokemon()}
       </PokemonListContainer>

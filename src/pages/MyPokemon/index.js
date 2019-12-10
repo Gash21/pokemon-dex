@@ -39,7 +39,6 @@ class MyPokemon extends React.Component {
         {
           myPokemon.map(item => {
             const { customName, name, id, sprites } = item;
-            console.log(item);
             return <Card key={item.id} style={{ marginTop: 10, marginBottom: 10 }}>
               <Row>
                 <Col sm={4} xs={4} md={4}>

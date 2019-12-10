@@ -14,7 +14,8 @@ export const getListPokemon = (page, limit) => {
           type: GET_POKEMON_LIST,
           payload: res.response.results,
           next: res.response.next,
-          previous: res.response.previous
+          previous: res.response.previous,
+          count: res.response.count
         })
         return res.response.results
       }
