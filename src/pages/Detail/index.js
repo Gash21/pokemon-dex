@@ -127,7 +127,6 @@ class Detail extends React.Component {
     const { pokemonDetail, path } = this.props;
     const { showModal, owned, title, message } = this.state;
     if (Object.keys(pokemonDetail).length === 0) {
-      // navigate('/')
       return (
         <Layout path={path}>
           <Container>
@@ -225,7 +224,6 @@ class Detail extends React.Component {
           <Modal.Body>
             <strong>{message}</strong>
             {this.state.success &&
-              // <Form inline={true}>
               <>
                 <Form.Group><br />
                   <Form.Label>Name your Pokémon !</Form.Label>
@@ -246,7 +244,6 @@ class Detail extends React.Component {
                   <Button type="submit" style={{ paddingLeft: 50, paddingRight: 50 }} onClick={() => this.savePokemon({ id, name })}>Save</Button>
                 </div>
               </>
-              // </Form>
             }
           </Modal.Body>
         </Modal>

@@ -31,7 +31,6 @@ const myPokemonReducers = (state = initialState, action) => {
         return li.name === action.name
       })
       list.splice(index, 1)
-      console.log(list);
       return {
         ...state,
         list
