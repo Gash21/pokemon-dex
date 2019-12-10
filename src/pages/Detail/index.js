@@ -36,22 +36,34 @@ class Detail extends React.Component {
   async catchPokemon(pokemonName) {
     let randomNumber = Math.floor(Math.random() * 100);
     const catchResult = await generate(randomNumber);
-    let message = "You have successfully catch this Pokémon";
+    let message = "Congratulations! \nYou have successfully catch this Pokémon";
+    let title = "Gotcha!!";
     if (!catchResult) {
       message = "You failed to catch this Pokémon, please try again!";
+      title = "I'm sorry..."
     }
     this.setState({
       message,
+      title,
       success: catchResult,
       pokemonName,
       owned: catchResult,
     })
     this.toggleModal();
+    if (catchResult) {
+      const { pokemonDetail, savePokemon } = this.props;
+      const pokemon = {
+        id: pokemonDetail.id,
+        name: pokemonDetail.name,
+        customName: pokemonDetail.name,
+        sprites: pokemonDetail.sprites
+      }
+      savePokemon(pokemon)
+    }
   }
 
   componentWillUnmount() {
     this.setState({
-
       showModal: false,
       message: "",
       success: false,
@@ -80,7 +92,6 @@ class Detail extends React.Component {
       customName: this.state.pokemonName,
       sprites: pokemonDetail.sprites
     }
-    console.log(pokemon)
     savePokemon(pokemon)
     this.toggleModal();
 
@@ -89,24 +100,21 @@ class Detail extends React.Component {
   releasePokemon(name) {
     const { releasePokemon, pokemonDetail } = this.props;
     this.setState({
-      // message,
       success: false,
       pokemonName: name,
       owned: false,
     })
     releasePokemon(name, pokemonDetail.id);
-    // this.toggleModal();
 
   }
 
   async componentDidMount() {
-    const { pokemonId, myPokemon, pokemonDetail } = this.props;
+    const { pokemonId, myPokemon } = this.props;
     await this.props.getDetailPokemon(pokemonId)
     let isOwned = myPokemon.findIndex(poke => {
-      return poke.name === pokemonDetail.name
+      return poke.name === pokemonId
     })
     if (isOwned > -1) {
-      console.log(myPokemon[isOwned])
       this.setState({
         myOwnPokemon: myPokemon[isOwned],
         owned: true,
@@ -117,8 +125,7 @@ class Detail extends React.Component {
 
   render() {
     const { pokemonDetail, path } = this.props;
-    const { showModal, owned } = this.state;
-    console.log(this.state)
+    const { showModal, owned, title, message } = this.state;
     if (Object.keys(pokemonDetail).length === 0) {
       // navigate('/')
       return (
@@ -204,30 +211,39 @@ class Detail extends React.Component {
           size="sm"
           show={showModal}
           onHide={() => this.toggleModal()}
-          aria-labelledby="example-modal-sizes-title-sm"
+          aria-labelledby="example-modal-sizes-title-sm-vcenter"
+          centered
         >
           <Modal.Header closeButton>
             <Modal.Title id="example-modal-sizes-title-sm">
-              Gotta Catch `em All !
+              {title}
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <strong>{this.state.message}</strong>
+            <strong>{message}</strong>
             {this.state.success &&
-              <Form>
-                <Form.Group controlId="pokemonName"><br />
+              // <Form inline={true}>
+              <>
+                <Form.Group><br />
                   <Form.Label>Name your Pokémon !</Form.Label>
                   <Form.Control
                     type="text"
                     name="pokemonName"
                     value={this.state.pokemonName}
+                    onKeyPress={(e) => {
+                      if (e.charCode === 13) {
+                        this.savePokemon({ id, name })
+                        return true;
+                      }
+                    }}
                     onChange={(e) => this.onChangeName(e)}
                     placeholder="My Cute Pokémon" />
                 </Form.Group>
                 <div className="text-center">
-                  <Button style={{ paddingLeft: 50, paddingRight: 50 }} onClick={() => this.savePokemon({ id, name })}>Save</Button>
+                  <Button type="submit" style={{ paddingLeft: 50, paddingRight: 50 }} onClick={() => this.savePokemon({ id, name })}>Save</Button>
                 </div>
-              </Form>
+              </>
+              // </Form>
             }
           </Modal.Body>
         </Modal>

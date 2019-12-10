@@ -1,4 +1,4 @@
-import { GET_POKEMON_LIST } from 'libraries/types'
+import { GET_POKEMON_LIST, CLEAR_POKEMON_LIST } from 'libraries/types'
 const initialState = {
   pokemonList: [],
   next: null,
@@ -16,6 +16,11 @@ const mainReducers = (state = initialState, action) => {
 
       };
 
+    case CLEAR_POKEMON_LIST:
+      return {
+        ...state,
+        pokemonList: []
+      }
     default:
       return state;
   }

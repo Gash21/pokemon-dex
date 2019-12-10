@@ -4,8 +4,21 @@ const initialState = {
 };
 
 const myPokemonReducers = (state = initialState, action) => {
+  let list = state.list;
+  let index;
   switch (action.type) {
     case SAVE_POKEMON:
+      index = list.findIndex((li) => {
+        return li.name === action.payload.name
+      })
+      if (index > -1) {
+        list[index] = action.payload;
+        return {
+          ...state,
+          list
+        };
+      }
+
       return {
         ...state,
         list: [
@@ -14,13 +27,11 @@ const myPokemonReducers = (state = initialState, action) => {
         ]
       };
     case RELEASE_POKEMON:
-      let list = state.list;
-      let index = list.findIndex((li) => {
+      index = list.findIndex((li) => {
         return li.name === action.name
       })
-      console.log(index)
       list.splice(index, 1)
-      console.log(list)
+      console.log(list);
       return {
         ...state,
         list

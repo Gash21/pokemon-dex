@@ -19,15 +19,24 @@ const mapDispatchToProps = {
 class Main extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      page: typeof props.page === 'undefined' ? 1 : parseInt(props.page)
+    }
   }
 
-  componentDidMount() {
-    this.props.getListPokemon(1, 20);
+  componentWillMount() {
+    const { page } = this.state
+    this.props.getListPokemon(page, 20);
   }
 
   onPress(name) {
     navigate(`/detail/${name}`)
+  }
+
+  goToPage(page) {
+    this.props.getListPokemon(page, 20);
+    this.setState({ page })
+    navigate(`/${page}`)
   }
 
   renderPokemon() {
@@ -43,15 +52,16 @@ class Main extends React.Component {
 
   render() {
     const { path, next, previous } = this.props
+    const { page } = this.state
     return <Layout path={path}>
       <PokemonListContainer>
         {this.renderPokemon()}
       </PokemonListContainer>
       <div style={{ display: "flex", justifyContent: 'center', alignContent: 'center', alignItems: 'center' }}>
-        <Button variant="secondary" style={{ marginRight: 10 }} disabled={previous === null ? true : false}>
+        <Button variant="secondary" style={{ marginRight: 10 }} onClick={() => this.goToPage(page - 1)} disabled={previous === null ? true : false}>
           {"<< Prev"}
         </Button>
-        <Button variant="secondary" style={{ marginLeft: 10 }} disabled={next === null ? true : false}>
+        <Button variant="secondary" style={{ marginLeft: 10 }} onClick={() => this.goToPage(page + 1)} disabled={next === null ? true : false}>
           {"Next >>"}
         </Button>
       </div>

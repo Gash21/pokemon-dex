@@ -1,12 +1,16 @@
-import { GET_POKEMON_LIST } from 'libraries/types'
+import { GET_POKEMON_LIST, CLEAR_POKEMON_LIST } from 'libraries/types'
 import fetchAPI from 'libraries/api';
 
 export const getListPokemon = (page, limit) => {
   return dispatch => {
+    console.log(page, limit)
     const offset = (page - 1) * limit;
+
+    dispatch({
+      type: CLEAR_POKEMON_LIST
+    })
     return fetchAPI('pokemon/', { offset, limit }, { method: 'GET' }).then(res => {
       if (res.success === 1) {
-        console.log(res.response.results)
         dispatch({
           type: GET_POKEMON_LIST,
           payload: res.response.results,

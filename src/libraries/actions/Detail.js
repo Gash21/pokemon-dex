@@ -8,12 +8,10 @@ export const getDetailPokemon = (name) => {
     })
     return fetchAPI(`pokemon/${name}`, {}, { method: 'GET' }).then(res => {
       if (res.success === 1) {
-        console.log(res.response)
         dispatch({
           type: GET_POKEMON_DETAIL,
           payload: res.response,
         })
-        // return res.response.results
       }
     })
   }

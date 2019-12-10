@@ -10,6 +10,7 @@ function App() {
       <Router>
         <Detail path="/detail/:pokemonId" />
         <MyPokemon path="/my-pokemon" />
+        <Main path="/:page" />
         <Main path="/" />
       </Router>
     </Provider>

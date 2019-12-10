@@ -12,6 +12,7 @@ export const savePokemon = (pokemon) => {
 
 export const releasePokemon = (name, id) => {
   return dispatch => {
+    console.log(name, id);
     dispatch({
       type: RELEASE_POKEMON,
       name,

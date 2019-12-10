@@ -1,37 +1,72 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Alert } from "react-bootstrap";
-import { Link } from "@reach/router";
+import { Card, Row, Col, Image, Button, Container } from "react-bootstrap";
+import { navigate } from "@reach/router";
 import { Layout } from 'components'
+import { releasePokemon } from "libraries/actions";
 
-const mapStateToProps = state => ({ detail: state.detail });
+const mapStateToProps = ({ myPokemon }) => {
+  return { myPokemon: myPokemon.list }
+};
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { releasePokemon };
 
 
 class MyPokemon extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      myPokemon: props.myPokemon
+    }
+  }
+
+  toTitleCase(str) {
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+  }
+
+  componentDidMount() {
+    this.setState({
+      myPokemon: this.props.myPokemon
+    })
   }
 
   render() {
-    const { path } = this.props
+    const { path, releasePokemon, myPokemon } = this.props;
     return <Layout path={path}>
-      <Alert variant="success">
-        <Alert.Heading>Hey, nice to see you</Alert.Heading>
-        <p>
-          Aww yeah, you successfully read this important alert message. This example
-          text is going to run a bit longer so that you can see how spacing within an
-          alert works with this kind of content.
-    </p>
-        <hr />
-        <p className="mb-0">
-          Whenever you need to, be sure to use margin utilities to keep things nice
-          and tidy.
-    </p>
-        <Link to="/">Go to Index</Link>
-      </Alert>
+      <Container>
+        {
+          myPokemon.map(item => {
+            const { customName, name, id, sprites } = item;
+            console.log(item);
+            return <Card key={item.id} style={{ marginTop: 10, marginBottom: 10 }}>
+              <Row>
+                <Col sm={4} xs={4} md={4}>
+                  <Image src={sprites.front_default}></Image>
+                </Col>
+                <Col sm={8} xs={8} md={8} style={{ flexDirection: "row", padding: 10, }}>
+                  <strong>
+                    {`#${id} ${this.toTitleCase(name.replace(/-/g, ' '))}`}
+                  </strong><br />
+                  <i>
+                    <strong>
+                      {`${this.toTitleCase(customName.replace(/-/g, ' '))}`}
+                    </strong>
+                  </i>
+                  <br />
+                  <Button size="sm" style={{ marginRight: 15 }} onClick={() => navigate(`/detail/${name}`)}>View Detail</Button>
+                  <Button size="sm" variant="danger" onClick={() => {
+                    releasePokemon(name, id)
+                    navigate('/my-pokemon')
+                  }}>Release</Button>
+                </Col>
+
+              </Row>
+            </Card>
+          })
+        }
+      </Container>
     </Layout>
   }
 
